@@ -2255,15 +2255,10 @@ const MarkdownFileLink = memo(function MarkdownFileLink({
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                if (shouldOpenMarkdownFileLinkInEditor(event)) {
-                  if (onOpenExternally) {
-                    handleOpenExternally();
-                    return;
-                  }
-                  if (onOpen) {
-                    handleOpenInEditor();
-                    return;
-                  }
+                if ((onOpenExternally || onOpen) && shouldOpenMarkdownFileLinkInEditor(event)) {
+                  if (onOpenExternally) handleOpenExternally();
+                  else handleOpenInEditor();
+                  return;
                 }
                 if (useBrowserPrimaryAction) {
                   if (onOpenInBrowser) handleOpenInBrowser();
